@@ -1,7 +1,23 @@
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView, DetailView
 from .models import Recipe
 from .forms import RecipeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+class RecipeDetail(DetailView):
+    """View a single recipe"""
+
+    template_name = "recipes/recipe_detail.html"
+    model = Recipe
+    context_object_name = "recipe"
+
+
+class Recipes(ListView):
+    """View all recipes"""
+
+    template_name = "recipes/recipes.html"
+    model = Recipe
+    context_object_name = "recipes"
 
 
 class AddRecipe(LoginRequiredMixin, CreateView):
